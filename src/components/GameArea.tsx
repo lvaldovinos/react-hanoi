@@ -9,6 +9,9 @@ const style = {
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
+  width: "900px",
+  border: "1px solid black",
+  margin: "1rem",
 };
 
 interface IGameArea {
