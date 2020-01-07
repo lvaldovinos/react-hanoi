@@ -1,24 +1,33 @@
 import Node from "./node";
 
-export default class Stack<T> {
+export default class Stack<T> implements Iterable<T> {
   private top: Node<T> | null;
 
   constructor () {
     this.top = null;
   }
 
-  public push (value: T): Stack<T> {
+  push (value: T): Stack<T> {
     if (!this.top) {
       this.top = new Node<T>(value);
       return this;
     }
     const node = new Node<T>(value);
     this.top.addParent(node);
+    node.addChild(this.top);
     this.top = node;
     return this;
   }
 
-  public pop (): T {
+  *[Symbol.iterator] () {
+    let node: Node<T> = this.top;
+    while (node) {
+      yield node.value;
+      node = node.childNode;
+    }
+  }
+
+  pop (): T {
     const value: T = this.top.value;
     const childNode: Node<T> = this.top.childNode;
     this.top = childNode;
@@ -33,5 +42,12 @@ export default class Stack<T> {
       node = node.childNode;
     }
     return size;
+  }
+
+  getTopValue (): T | null {
+    if (!this.top) {
+      return null;
+    }
+    return this.top.value;
   }
 }

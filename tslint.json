@@ -3,6 +3,11 @@
         "tslint:recommended"
     ],
     "jsRules": {},
-    "rules": {},
+    "rules": {
+      "member-access": [true, "no-public"],
+      "object-literal-sort-keys": false,
+      "import-sources-order": "any",
+      "named-imports-order": "any"
+    },
     "rulesDirectory": []
 }
